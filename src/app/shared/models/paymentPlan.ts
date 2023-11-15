@@ -1,0 +1,22 @@
+
+export interface PaymentPlan{
+  id: number,
+  name: string,
+  vehiclePrice: number,
+  initialFeePercent: number,
+  currency: string,
+  anualPaymentPeriods: number,
+  paymentFrequency: string,
+  parcialGracePeriods: number,
+  totalGracePeriods: number,
+  TEA: number,
+  TNA: number,
+  bank_id: number,
+  user_id: number,
+  fundingAmount: number,
+  totalPeriods: number,
+  changedTE: number,
+  fixedFee: number,
+  desgravamenPercentByFreq: number,
+  vehicleInsuranceAmount: number,
+}
