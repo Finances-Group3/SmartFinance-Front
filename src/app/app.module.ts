@@ -34,6 +34,11 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import {MatTableModule} from "@angular/material/table";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { DashboardComponent } from './home/pages/dashboard/dashboard.component';
+import { PaymentPlanCardComponent } from './home/components/payment-plan-card/payment-plan-card.component';
+import { BanksInfoComponent } from './shared/pages/banks-info/banks-info.component';
+import { NewPaymentPlanComponent } from './payment-plans/pages/new-payment-plan/new-payment-plan.component';
+import { PaymentDetailsComponent } from './payment-plans/pages/payment-details/payment-details.component';
 
 
 @NgModule({
@@ -41,7 +46,12 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
     AppComponent,
     LogInComponent,
     RegisterComponent,
-    NavbarComponent
+    NavbarComponent,
+    DashboardComponent,
+    PaymentPlanCardComponent,
+    BanksInfoComponent,
+    NewPaymentPlanComponent,
+    PaymentDetailsComponent
   ],
   imports: [
     HttpClientModule,
