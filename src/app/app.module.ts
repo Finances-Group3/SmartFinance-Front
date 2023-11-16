@@ -34,6 +34,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import {MatTableModule} from "@angular/material/table";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
+
+
+
 import { DashboardComponent } from './home/pages/dashboard/dashboard.component';
 import { PaymentPlanCardComponent } from './home/components/payment-plan-card/payment-plan-card.component';
 import { BanksInfoComponent } from './shared/pages/banks-info/banks-info.component';

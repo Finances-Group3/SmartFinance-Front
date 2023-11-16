@@ -1,29 +1,15 @@
-<mat-toolbar class="bg-white flex justify-around items-center">
-  <a [routerLink]="['/home']">
-    <img src="../assets/logo-smart-finance.png" width="140px" alt="SmartFinance Logo" class="hover:scale-95 duration-200">
+<mat-toolbar class="bg-[#ffffff] flex justify-around items-center px-4 py-2">
+  <a [routerLink]="['/dashboard']" class="flex items-center my-2">
+    <img src="../assets/logo-smart-finance.png" class="w-32 hover:scale-95 duration-200 mx-2 rounded-lg" alt="SmartFinance Logo" >
+    <span class="text-[#3d348b] text-sm ml-2">{{ username }}</span>
   </a>
-  <div class="flex justify center gap-4">
-    <button mat-stroked-button color="primary" [routerLink]="['/new-plan']">
-      Plan de Pago
+  <div class="flex justify-center gap-4">
+    <button mat-raised-button color="warn" class="font-bold hover:text-white hover:scale-110 duration-200 px-4 py-2 rounded-lg" [routerLink]="['/info-banks']">
+      Bancos Info
     </button>
-    <button color="primary" mat-mini-fab [matMenuTriggerFor]="menu">
-      <mat-icon>home</mat-icon>
+    <button mat-raised-button color="warn" class="font-bold hover:text-white hover:scale-110 duration-200 px-4 py-2 rounded-lg" [routerLink]="['/new-plan']">
+      Nueva Cotización
     </button>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item [routerLink]="['/home']">
-        Inicio
-      </button>
-      <a [routerLink]="['/perfil']">
-        <button mat-menu-item>
-          Mi Perfil
-        </button>
-      </a>
-      <a [routerLink]="['/login']">
-        <button mat-menu-item>
-          Cerrar Sesión
-        </button>
-      </a>
-    </mat-menu>
   </div>
 </mat-toolbar>
 
