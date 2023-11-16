@@ -1,15 +1,24 @@
-<mat-toolbar class="bg-[#3d348b] flex justify-around items-center px-4 py-2">
-  <a [routerLink]="['/dashboard']" class="flex items-center my-2">
-    <img src="../assets/logo-smart-finance.png" class="w-32 hover:scale-95 duration-200 mx-2 rounded-lg" alt="SmartFinance Logo" >
-    <span class="text-[#3d348b] text-sm ml-2">{{ username }}</span>
+
+<mat-toolbar class="bg-[#3d348b] flex justify-around items-center">
+
+  <a [routerLink]="['/dashboard']" class="flex items-center p-4">
+
+    <img src="../assets/logo-smart-finance.png" class="w-32 hover:scale-125 duration-200 rounded-lg" alt="SmartFinance Logo" >
+    <span class="text-[#3d348b] text-sm ">{{ username }}</span>
+
   </a>
-  <div class="flex justify-center gap-4 ">
-    <button mat-raised-button color="warn" class="font-bold hover:text-white hover:scale-110 duration-200 px-4 py-2 rounded-lg" [routerLink]="['/info-banks']">
+
+  <div class="flex justify-center gap-6 text-gray-200">
+
+    <button mat-raised-button class=" font-medium hover:scale-110 duration-200 px-4 py-2 rounded-lg" [routerLink]="['/info-banks']">
       Bancos Info
     </button>
-    <button mat-raised-button color="warn" class="font-bold hover:text-white hover:scale-110 duration-200 px-4 py-2 rounded-lg" [routerLink]="['/new-plan']">
+
+    <button mat-raised-button class=" font-medium hover:scale-110 duration-200 px-4 py-2 rounded-lg" [routerLink]="['/new-plan']">
       Nueva Cotización
     </button>
+
   </div>
+
 </mat-toolbar>
 
