@@ -1,1 +1,13 @@
-<p>payment-plan-card works!</p>
+<mat-card class="max-w-lg mx-auto flex items-center p-4 bg-white rounded-xl shadow-lg mb-5">
+  <div class="flex items-center flex-grow mr-5">
+    <img src="" class="w-20 h-20 rounded-full mr-5" alt="Bank Logo">
+    <div class="flex-grow">
+      <div class="text-lg font-bold">Plan de Pagos: paymentPlan.Name</div>
+      <div class="text-md">Monto: vehiclePrice</div>
+      <div class="text-md">Tasa: tea %</div>
+    </div>
+  </div>
+  <button mat-raised-button color="primary" [routerLink]="['/payment-details']" class="font-bold">
+    Ver más
+  </button>
+</mat-card>
