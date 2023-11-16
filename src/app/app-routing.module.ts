@@ -3,9 +3,9 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { LogInComponent } from './authentication/pages/log-in/log-in.component';
 import { RegisterComponent } from './authentication/pages/register/register.component';
-import {DashboardComponent} from "./home/pages/dashboard/dashboard.component";
-import {BanksInfoComponent} from "./shared/pages/banks-info/banks-info.component";
-import {NewPaymentPlanComponent} from "./payment-plans/pages/new-payment-plan/new-payment-plan.component";
+import { DashboardComponent } from "./home/pages/dashboard/dashboard.component";
+import { BanksInfoComponent } from "./shared/pages/banks-info/banks-info.component";
+import { NewPaymentPlanComponent } from "./payment-plans/pages/new-payment-plan/new-payment-plan.component";
 
 const routes: Routes = [
   { path: 'login', component: LogInComponent },
