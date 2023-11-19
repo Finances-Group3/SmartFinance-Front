@@ -1,1 +1,77 @@
-<p>payment-details works!</p>
+<app-navbar></app-navbar>
+<div class="text-center text-2xl font-bold my-10 text-[#1d9393]">Resultados del Crédito Vehicular</div>
+
+<div class="bg-[#cacadc] rounded-lg shadow-md p-6 max-w-2xl mx-auto">
+  <div class="w-full">
+    <p class="font-semibold text-lg mb-4 text-center">Plan de Pagos:  {{plan.name}} </p>
+    <div class="flex flex-row justify-between mb-4">
+      <p class="text-lg">Precio del Carro: {{plan.vehicle_price | number:'1.2-3'}} {{plan.currency}}</p>
+      <p class="text-lg">Costo a financiar: {{plan.funding_amount | number:'1.2-3'}}</p>
+    </div>
+    <div class="flex flex-row justify-between mb-4">
+      <p class="text-lg">Plazo: {{plan.total_periods}} pagos</p>
+      <p class="text-lg">TEA:  {{plan.TEA*100 | number:'1.2-3'}}  %</p>
+    </div>
+    <div class="flex flex-row justify-between mb-4">
+      <p class="text-lg">VNA: vna %</p>
+      <p class="text-lg">TIR:  tir  %</p>
+    </div>
+  </div>
+</div>
+
+<table mat-table [dataSource]="dataSource" class="w-full mt-4">
+
+  <ng-container matColumnDef="nro_cuota">
+    <th mat-header-cell *matHeaderCellDef> Nro. Cuota </th>
+    <td mat-cell *matCellDef="let element"> {{ element.nro_cuota }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="saldo_inicial">
+    <th mat-header-cell *matHeaderCellDef> Saldo Inicial </th>
+    <td mat-cell *matCellDef="let element"> {{element.saldo_inicial | number:'1.2-3'}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="interes">
+    <th mat-header-cell *matHeaderCellDef> Interés </th>
+    <td mat-cell *matCellDef="let element"> {{element.interes | number:'1.2-3'}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="cuota_fija">
+    <th mat-header-cell *matHeaderCellDef> Cuota Fija </th>
+    <td mat-cell *matCellDef="let element"> {{element.cuota_fija | number:'1.2-3'}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="amortizacion">
+    <th mat-header-cell *matHeaderCellDef> Amortizacion </th>
+    <td mat-cell *matCellDef="let element"> {{element.amortizacion | number:'1.2-3'}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="pago_seguro_desgravamen">
+    <th mat-header-cell *matHeaderCellDef> Seg. Desgravamen </th>
+    <td mat-cell *matCellDef="let element"> {{element.pago_seguro_desgravamen | number:'1.2-3'}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="pago_seguro_vehicular">
+    <th mat-header-cell *matHeaderCellDef> Seg. Vehicular </th>
+    <td mat-cell *matCellDef="let element"> {{element.pago_seguro_vehicular | number:'1.2-3'}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="portes">
+    <th mat-header-cell *matHeaderCellDef> Portes </th>
+    <td mat-cell *matCellDef="let element"> {{element.portes}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="saldo_final">
+    <th mat-header-cell *matHeaderCellDef> Saldo Final </th>
+    <td mat-cell *matCellDef="let element"> {{element.saldo_final | number:'1.2-3'}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="flujo">
+    <th mat-header-cell *matHeaderCellDef> Flujo </th>
+    <td mat-cell *matCellDef="let element"> {{element.flujo | number:'1.2-3'}} </td>
+  </ng-container>
+
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

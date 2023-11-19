@@ -42,6 +42,7 @@ import { PaymentPlanCardComponent } from './home/components/payment-plan-card/pa
 import { BanksInfoComponent } from './shared/pages/banks-info/banks-info.component';
 import { NewPaymentPlanComponent } from './payment-plans/pages/new-payment-plan/new-payment-plan.component';
 import { PaymentDetailsComponent } from './payment-plans/pages/payment-details/payment-details.component';
+import { LegalComponent } from './shared/pages/legal/legal.component';
 
 
 @NgModule({
@@ -54,7 +55,8 @@ import { PaymentDetailsComponent } from './payment-plans/pages/payment-details/p
     PaymentPlanCardComponent,
     BanksInfoComponent,
     NewPaymentPlanComponent,
-    PaymentDetailsComponent
+    PaymentDetailsComponent,
+    LegalComponent
   ],
   imports: [
     HttpClientModule,

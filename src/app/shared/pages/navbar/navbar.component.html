@@ -1,10 +1,11 @@
 
-<mat-toolbar class="bg-[#3d348b] flex justify-around items-center">
+<mat-toolbar class="bg-[#3d348b] flex justify-around items-center mb-5">
 
   <a [routerLink]="['/dashboard']" class="flex items-center p-4">
 
     <img src="../assets/logo-smart-finance.png" class="w-32 hover:scale-125 duration-200 rounded-lg" alt="SmartFinance Logo" >
-    <span class="text-[#3d348b] text-sm ">{{ username }}</span>
+    <span class="text-[#ffffff] text-base ml-5 font-medium capitalize transition-all duration-300 hover:scale-125">{{ firstName }} {{ lastName }}</span>
+
 
   </a>
 
@@ -18,7 +19,19 @@
       Nueva Cotización
     </button>
 
+    <button color="primary" mat-mini-fab [matMenuTriggerFor]="menu">
+      <mat-icon>home</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu" xPosition="after" yPosition="below" class="z-200">
+      <ng-template matMenuContent>
+        <button mat-menu-item [routerLink]="['/legal']">
+          Marco Legal
+        </button>
+        <button mat-menu-item (click)="logout()">
+          Cerrar Sesión
+        </button>
+      </ng-template>
+    </mat-menu>
   </div>
-
 </mat-toolbar>
 

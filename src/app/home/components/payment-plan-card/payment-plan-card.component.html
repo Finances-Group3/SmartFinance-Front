@@ -1,13 +1,13 @@
-<mat-card class="max-w-lg mx-auto flex items-center p-4 bg-white rounded-xl shadow-lg mb-5">
+<mat-card *ngFor="let plan of plans" class="max-w-lg w-fit mx-auto flex items-center p-4 bg-white rounded-xl shadow-lg mb-5">
   <div class="flex items-center flex-grow mr-5">
-    <img src="" class="w-20 h-20 rounded-full mr-5" alt="Bank Logo">
+    <img [src]="getBank(plan.bank_id)?.image_url" class="h-12 rounded-full mr-5" alt="Bank Logo">
     <div class="flex-grow">
-      <div class="text-lg font-bold">Plan de Pagos: paymentPlan.Name</div>
-      <div class="text-md">Monto: vehiclePrice</div>
-      <div class="text-md">Tasa: tea %</div>
+      <div class="text-lg font-bold">Plan de Pagos: {{plan.name}}</div>
+      <div class="text-md">Monto: {{plan.vehicle_price}}</div>
+      <div class="text-md">Tasa: {{plan.TEA*100 | number:'1.2-3'}} %</div>
     </div>
   </div>
-  <button mat-raised-button color="primary" [routerLink]="['/payment-details']" class="font-bold">
+  <button mat-raised-button color="primary" [routerLink]="['/details', plan.id]" class="font-bold mt-4">
     Ver más
   </button>
 </mat-card>
