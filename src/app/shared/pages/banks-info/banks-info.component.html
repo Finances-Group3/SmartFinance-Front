@@ -1,33 +1,19 @@
+<app-navbar></app-navbar>
 <div class="container mx-auto text-center py-6">
   <h1 class="text-2xl font-bold mb-6">Entidades Financieras</h1>
   <div class="flex justify-around items-start">
 
-    <mat-card class="w-1/4 bg-white shadow-lg rounded-lg p-4 mx-4">
-      <img src="" class="w-20 h-20 mx-auto" alt="Logo del Banco 1">
+    <mat-card *ngFor="let bank of banks" class="w-1/4 bg-white shadow-lg rounded-lg p-4 mx-4">
+      <a href="{{bank.oficial_page}}" target="_blank">
+        <img [src]="bank.image_url || ''" class="h-20 mx-auto hover:scale-95 duration-200" [alt]="'Logo del ' + bank.name">
+      </a>
       <mat-list>
-        <mat-list-item>Seguro desgravamen</mat-list-item>
-        <mat-list-item>TEA</mat-list-item>
-        <mat-list-item>Seguro Vehicular</mat-list-item>
+        <mat-list-item>Seguro desgravamen: {{ bank.anual_desgravamen_insurance_percent*100 | number:'1.2-3'}}%</mat-list-item>
+        <mat-list-item>TEA: {{ bank.TEA*100 | number:'1.2-3'}}%</mat-list-item>
+        <mat-list-item>Seguro Vehicular: {{ bank.anual_vehicle_insurance_percent*100 | number:'1.2-3'}}%</mat-list-item>
       </mat-list>
     </mat-card>
 
-    <mat-card class="w-1/4 bg-white shadow-lg rounded-lg p-4 mx-4">
-      <img src="" class="w-20 h-20 mx-auto" alt="Logo del Banco 2">
-      <mat-list>
-        <mat-list-item>Seguro desgravamen</mat-list-item>
-        <mat-list-item>TEA</mat-list-item>
-        <mat-list-item>Seguro Vehicular</mat-list-item>
-      </mat-list>
-    </mat-card>
-
-    <mat-card class="w-1/4 bg-white shadow-lg rounded-lg p-4 mx-4">
-      <img src="" class="w-20 h-20 mx-auto" alt="Logo del Banco 3">
-      <mat-list>
-        <mat-list-item>Seguro desgravamen</mat-list-item>
-        <mat-list-item>TEA</mat-list-item>
-        <mat-list-item>Seguro Vehicular</mat-list-item>
-      </mat-list>
-    </mat-card>
 
   </div>
   <div class="mt-6">
