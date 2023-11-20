@@ -17,3 +17,7 @@ export class PaymentPlanDetailsService extends DataService<PaymentDetails>{
     return this.http.get<any>(`${this.basePath}/payment_plans/${id}/payment_details`);
   }
 }
+
+
+
+

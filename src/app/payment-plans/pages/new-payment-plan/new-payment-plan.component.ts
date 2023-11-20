@@ -30,7 +30,7 @@ export class NewPaymentPlanComponent implements OnInit{
       currency: ['', Validators.required],
       anual_payment_periods: [null, [Validators.required, Validators.pattern(/^[3-7]+$/)]],
       payment_frequency: ['', Validators.required],
-      parcial_grace_periods: [0],
+      parcial_grace_periods: ['', Validators.required],
       total_grace_periods: [null, Validators.required],
       TEA: [{value: null, disabled: true}, Validators.required],
       TNA: [{value: '', disabled: true}, Validators.required],
@@ -43,6 +43,9 @@ export class NewPaymentPlanComponent implements OnInit{
       desgravamen_percent_by_freq: [1],
       vehicle_insurance_amount:[1],
       physical_account_statement: ['', Validators.required],
+      VAN: [0],
+      TIR: [0],
+      TCEA: [0]
 
     });
   }
@@ -55,6 +58,10 @@ export class NewPaymentPlanComponent implements OnInit{
       } else {
         this.updateInterestRateSelection(4);
       }
+    });
+
+    this.paymentPlanForm.get('currency')?.valueChanges.subscribe(() => {
+      this.updateInterestRateBasedOnCurrency();
     });
   }
 
@@ -71,16 +78,25 @@ export class NewPaymentPlanComponent implements OnInit{
     const bank = this.banks.find(b => b.id === bankId);
     const TEAControl = this.paymentPlanForm.get('TEA');
     const TNAControl = this.paymentPlanForm.get('TNA');
+    const CurrencyControl = this.paymentPlanForm.get('currency');
 
     if (TEAControl && TNAControl) {
       TEAControl.enable({ emitEvent: false });
       TNAControl.enable({ emitEvent: false });
 
+
       if (bank) {
         if (bank.id !== 4) {
           if (bank.TEA && bank.TEA !== 0) {
-            TEAControl.setValue(bank.TEA*100);
-            TNAControl.setValue('TEA');
+            if(CurrencyControl?.value=='USD'){
+              TEAControl.setValue(bank.TEA_USD*100);
+              TNAControl.setValue('TEA');
+            }
+            else {
+              TEAControl.setValue(bank.TEA*100);
+              TNAControl.setValue('TEA');
+            }
+
           } else if (bank.TNA && bank.TNA !== 0) {
             TEAControl.setValue(bank.TNA*100);
             TNAControl.setValue('TNA');
@@ -91,13 +107,20 @@ export class NewPaymentPlanComponent implements OnInit{
       } else {
         TEAControl.setValue(null);
         TNAControl.setValue(null);
+        CurrencyControl?.setValue(null);
       }
     } else {
       console.error('Control de formulario no encontrado');
     }
   }
 
-
+  updateInterestRateBasedOnCurrency() {
+    const bankId = this.paymentPlanForm.get('bank_id')?.value;
+    const currency = this.paymentPlanForm.get('currency')?.value;
+    if (bankId && currency) {
+      this.updateInterestRateSelection(parseInt(bankId));
+    }
+  }
 
 
   loadBanks() {
@@ -151,6 +174,33 @@ export class NewPaymentPlanComponent implements OnInit{
   prepareForSubmission(formValue: any): any {
     const initialFeePercent = parseInt(formValue.initial_fee_percent, 10) || 0;
     const userId = localStorage.getItem('user_id');
+
+    const graceTypeControl = this.paymentPlanForm.get('parcial_grace_periods'); //Total
+    const gracePeriodsControl = this.paymentPlanForm.get('total_grace_periods'); //3
+    let parcialGracePeriods = 0;
+    let totalGracePeriods = 0;
+
+    if (graceTypeControl && gracePeriodsControl && graceTypeControl.value && gracePeriodsControl.value) {
+      const gracePeriods = parseInt(gracePeriodsControl.value, 10) || 0; // gracePeriods = 3
+
+      // Asigna los períodos de gracia según el tipo de gracia seleccionado
+      if (graceTypeControl.value === 'Parcial') {
+        parcialGracePeriods = gracePeriods; // parcialGracePeriods = 3
+      } else if (graceTypeControl.value === 'Total') {
+        totalGracePeriods = gracePeriods; //totalGracePeriods = 3 este sería
+      }
+    }
+
+    /*let parcialGracePeriods = 0;
+    let totalGracePeriods = 0;
+
+    if (formValue.grace_type === 'Parcial') {
+      parcialGracePeriods = formValue.total_grace_periods;
+    } else if (formValue.grace_type === 'Total') {
+      totalGracePeriods = formValue.total_grace_periods;
+    }*/
+
+
     const submissionValue = {
       ...formValue,
       initial_fee_percent: initialFeePercent/100,
@@ -159,8 +209,15 @@ export class NewPaymentPlanComponent implements OnInit{
       payment_frequency: this.mapFrequencyToEnum(formValue.payment_frequency),
       physical_account_statement: formValue.physical_account_statement === 'Sí' ? true : false,
       TEA: this.TEAValue,
-      TNA: this.TNAValue
+      TNA: this.TNAValue,
+
+      parcial_grace_periods: parcialGracePeriods,
+      total_grace_periods: totalGracePeriods,
+
     };
+
+
+
     Object.keys(submissionValue).forEach(key => {
       if (submissionValue[key] == null) {
         delete submissionValue[key];
