@@ -19,5 +19,8 @@ export interface PaymentPlan{
   fixed_fee: number,
   desgravamen_percent_by_freq: number,
   vehicle_insurance_amount: number,
-  physical_account_statement: boolean
+  physical_account_statement: boolean,
+  VNA: number,
+  TIR: number,
+  TCEA: number
 }

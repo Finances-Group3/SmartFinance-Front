@@ -8,5 +8,6 @@ export interface Bank {
   anual_desgravamen_insurance_percent: number;
   anual_vehicle_insurance_percent: number;
   oficial_page: string;
+  TEA_USD: number;
 }
 
