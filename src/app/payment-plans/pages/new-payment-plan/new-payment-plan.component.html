@@ -1,1 +1,114 @@
-<p>new-payment-plan works!</p>
+<app-navbar></app-navbar>
+<div class="m-6 flex place-content-center">
+  <form [formGroup]="paymentPlanForm" (ngSubmit)="submitPaymentPlan()">
+    <div class="bg-[#3d348b62] p-8 w-fit rounded-lg">
+      <div class="space-y-8">
+        <h1 class="text-2xl font-bold text-center pb-2.5">Calculadora de Créditos Vehiculares</h1>
+        <div>
+          <label for="plan_pago">Nuevo Plan de Pagos:</label>
+          <input type="text" id="plan_pago" formControlName="name" class="border px-2 py-1 ml-2 focus:outline-none focus:border-gray-600 w-96 rounded" placeholder="Ingresa un nombre para tu nuevo plan de pagos"> <!-- Input con border-radius -->
+        </div>
+        <div class="flex space-x-3 items-center">
+          <div>
+            <label for="valor_carro">Valor del carro:</label>
+            <input type="text" id="valor_carro" formControlName="vehicle_price" class="border px-2 py-1 ml-2 focus:outline-none focus:border-gray-600 w-40 rounded" placeholder="Monto Total">
+          </div>
+          <div>
+            <label for="currency">Moneda:</label>
+            <select id="currency" formControlName="currency" class="ml-2 rounded">
+              <option value="">-</option>
+              <option value="USD">USD</option>
+              <option value="PEN">PEN</option>
+            </select>
+          </div>
+        </div>
+        <div class="flex space-x-3 items-center">
+          <div class="flex items-center space-x-3">
+            <label for="cuota_inicial" class="block text-sm font-medium text-gray-700">
+              Cuota Inicial:
+            </label>
+            <div class="relative flex-1">
+              <input type="text" id="cuota_inicial" formControlName="initial_fee_percent" class="border px-2 py-1 focus:outline-none focus:border-gray-600 w-full pr-7 rounded" placeholder="Ingresa la cuota inicial">
+              <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                %
+              </div>
+            </div>
+          </div>
+          <div>
+            <label for="banco">Banco:</label>
+            <select id="banco" formControlName="bank_id" class="ml-2 rounded">
+              <option value="">-</option>
+              <option *ngFor="let bank of banks" [value]="bank.id">{{bank.name}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="flex space-x-3 items-center">
+          <div>
+            <label for="frecuencia_pagos">Frecuencia de Pagos:</label>
+            <select id="frecuencia_pagos" formControlName="payment_frequency" class="ml-2 rounded">
+              <option value="">-</option>
+              <option value="Mensual">Mensual</option>
+              <option value="Bimestral">Bimestral</option>
+              <option value="Trimestral">Trimestral</option>
+              <option value="Cuatrimestral">Cuatrimestral</option>
+              <option value="Semestral">Semestral</option>
+              <option value="Anual">Anual</option>
+            </select>
+          </div>
+          <div class="flex items-center space-x-3 mt-3">
+            <label for="tasa_interes" class="block text-sm font-medium text-gray-700">
+              Tasa de Interés:
+            </label>
+            <div class="relative flex-1">
+              <input type="text" id="tasa_interes" formControlName="TEA" class="border px-2 py-1 focus:outline-none focus:border-gray-600 w-full pr-7 rounded" placeholder="Ingresa la tasa" [disabled]="!paymentPlanForm.get('TEA')!.enabled">
+              <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                %
+              </div>
+            </div>
+          </div>
+          <div>
+            <label for="tipo_tasa">Tipo de Tasa: </label>
+            <select id="tipo_tasa" formControlName="TNA" (ngModelChange)="onRateTypeChange($event)" class="ml-2 rounded" [disabled]="paymentPlanForm.get('TNA')!.disabled">
+              <option value="">-</option>
+              <option value="TEA">TEA</option>
+              <option value="TNA">TNA</option>
+            </select>
+          </div>
+        </div>
+        <div class="flex space-x-3 items-center">
+          <div>
+            <label for="numero_años">Número de Años:</label>
+            <input type="text" id="numero_años" formControlName="anual_payment_periods" class="border px-2 py-1 ml-2 focus:outline-none focus:border-gray-600 w-16 rounded" placeholder="Años">
+          </div>
+          <div>
+            <label for="envio_portes">Envío de Portes Físicos:</label>
+            <select id="envio_portes" formControlName="physical_account_statement" class="ml-2 rounded">
+              <option value="">-</option>
+              <option value="true">Sí</option>
+              <option value="false">No</option>
+            </select>
+          </div>
+        </div>
+        <div class="flex space-x-3 items-center">
+          <div>
+            <label for="periodo_gracia">Periodo de Gracia:</label>
+            <input type="text" id="periodo_gracia" formControlName="total_grace_periods" class="border px-2 py-1 ml-2 focus:outline-none focus:border-gray-600 w-20 rounded" placeholder="Periodos">
+          </div>
+          <div>
+            <label for="tipo_gracia">Tipo de Gracia: </label>
+            <select id="tipo_gracia" formControlName="parcial_grace_periods" class="rounded">
+              <option value="">-</option>
+              <option value="Total">Total</option>
+              <option value="Parcial">Parcial</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="mt-5 flex space-x-3">
+        <button type="button" (click)="resetForm()" class="border-2 border-indigo-700 bg-violet-900 text-white py-1 w-full rounded-md hover:bg-transparent hover:text-indigo-700 font-semibold">Limpiar</button>
+        <button type="submit" class="border-2 border-indigo-700 bg-violet-900 text-white py-1 w-full rounded-md hover:bg-transparent hover:text-indigo-700 font-semibold">Ingresar</button>
+      </div>
+    </div>
+  </form>
+</div>
+
