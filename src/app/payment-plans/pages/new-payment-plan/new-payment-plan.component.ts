@@ -28,7 +28,7 @@ export class NewPaymentPlanComponent implements OnInit{
       vehicle_price: [null, [Validators.required, Validators.pattern(/^\d+\.?\d*$/)]],
       initial_fee_percent: [null, [Validators.required, Validators.pattern(/^\d+\.?\d*$/)]],
       currency: ['', Validators.required],
-      anual_payment_periods: [null, [Validators.required, Validators.pattern(/^[3-7]+$/)]],
+      anual_payment_periods: [null, [Validators.required, Validators.pattern(/^[1-7]+$/)]],
       payment_frequency: ['', Validators.required],
       parcial_grace_periods: ['', Validators.required],
       total_grace_periods: [null, Validators.required],
